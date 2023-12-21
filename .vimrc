@@ -1,3 +1,6 @@
+" Set the cursor to a a blinking block at all times
+" let &t_EI = "\e[1 q"
+
 " Store the last 1000 commands in the history
 set history=1000
 
@@ -44,25 +47,37 @@ autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 
 " Change tabs to use 2 space characters instead. User :retab to make these changes to change all the tabs with these settings in the buffer.
-set shiftwidth=2 smarttab " Use 4-space indents, and to intelligently use the tab key for indentation instead of for inserting tab characters (when at the beginning of a line)
-set expandtab " Only use space caharacters, never tab characters
-set tabstop=8 softtabstop=0 " Set tab stops to be different from the indentation width, in order to reduce the chance of tab characters masquerading as proper indents
+function! UseSpaces()
+  set tabstop=2 " Size of a hard tabstop (ts)
+  set shiftwidth=2 smarttab " User 2-space indents. Smarttab is for setting tab key for indentation instead of for inserting tab characters when at the beginning of a line)
+  set expandtab " Only use space characters, never tab characters
+  set tabstop=8 softtabstop=0 " Set tabstops to be different from the indentation width, in order to reduce chance of tab characters masquerading as proper indents
+  set autoindent " Copy indent form current line when starting a new line
+  set smartindent " Apply syntax-aware indentation e.g. removing indent when putting } in C++)
+endfunction
 
-" Set autoindent (apply indentation of current line to the next line)
-set ai
+function! UseTabs()
+  set tabstop=4 " Size of a hard tabstop (ts)
+  set shiftwidth=4 " Size of an indentation (sw)
+  set noexpandtab " Always use tabs instead of space characters (noet)
+  set autoindent " Copy indent from current line when starting a new line
+  set smartindent " Apply syntax-aware indentation e.g. removing indent when putting } in C++)
+endfunction
 
-" Smart indent (apply syntax-aware indentation, e.g. removing indent when putting } in C++)
-set si
+call UseSpaces() " UseSpaces() by default
+
 
 "===============================================================================================================================
 " The following is vim movement tips that will serve as quick documentation for me
 "  - caw = Change a word
 "  - f/F = Search forwards and backwards within a long string
 "  - w/W b/B = move to next word/capitalized word forward and backwards respectively
-"  - :terminal = create a terminal buffer; click exit into the bash shell to close the buffer
+"  - :terminal = create a terminal buffer; type exit into the bash shell to close the buffer
 "  - CTRL+W j,k,h,l = move up, down,left, right respectively between buffer windows
-"  - CTRL+W <,> = adjust the window size of the buffer
-"  - bd = buffer delete; you can tab to see the options to delete as well
+"  - CTRL+W w = switch between window
+"  - CTRL+W +,- = adjust the window size of the buffer
+"  - :b = open buffer panel and tab to choose a buffer
+"  - :bd = buffer delete; you can tab to see the options to delete as well
 "  - :e allows you to select another file to edit
 "  - z+Enter/zt = place cursor at the top of the window (with respect to scrolloff setting)
 "  - z+./zz = place cursor at center of the window
