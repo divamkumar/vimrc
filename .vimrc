@@ -66,6 +66,7 @@ endfunction
 
 call UseSpaces() " UseSpaces() by default
 
+let mapleader=","
 
 "===============================================================================================================================
 " The following is vim movement tips that will serve as quick documentation for me
@@ -84,3 +85,4 @@ call UseSpaces() " UseSpaces() by default
 "  - z+_/zb = place cursor at the bottom of the window (with respect to scrolloff setting)
 "  - "*y = when yanking lines, using this will yank to the system clipboard to allow the pasting from vim to anywhere outside of the terminal (e.g. to a search bar, etc.)
 "  - :'<,'>w !clip.exe = this does the same thing as the above command except specifically when working within WSL
+"  - :set list = this allows you to see the exact tab charater vs space characters when using UseSpace() or UseTabs() function when making makefiles or c++ programs
