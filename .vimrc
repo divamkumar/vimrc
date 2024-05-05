@@ -1,5 +1,15 @@
-" Set the cursor to a a blinking block at all times
-" let &t_EI = "\e[1 q"
+" Set the cursor shape to be like the gvim default at all time (bar when insert block otherwise)
+if &term =~ '^xterm\\|rxvt'
+  " solid underscore
+  let &t_SI .= "\<Esc>[4 q"
+  " solid block
+  let &t_EI .= "\<Esc>[2 q"
+  " 1 or 0 -> blinking block
+  " 3 -> blinking underscore
+  " Recent versions of xterm (282 or above) also support
+  " 5 -> blinking vertical bar
+  " 6 -> solid vertical bar
+endif
 
 " Store the last 1000 commands in the history
 set history=1000
@@ -74,6 +84,7 @@ let mapleader=","
 "  - f/F = Search forwards and backwards within a long string
 "  - w/W b/B = move to next word/capitalized word forward and backwards respectively
 "  - :terminal = create a terminal buffer; type exit into the bash shell to close the buffer
+"  - :below terminal = create terminal buffer below the current buffer
 "  - CTRL+W j,k,h,l = move up, down,left, right respectively between buffer windows
 "  - CTRL+W w = switch between window
 "  - CTRL+W +,- = adjust the window size of the buffer
